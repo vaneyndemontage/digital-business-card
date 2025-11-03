@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TAP2GO – Contactkaart</title>
+  <meta name="theme-color" content="#111111">
+  <style>
+    :root{
+      --bg:#0e0e10;
+      --card:#151518;
+      --text:#ffffff;
+      --muted:#c7c7c7;
+      --red:#e22424;
+      --accent:#ff2d2d;
+      --pill:#1d1d21;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 1200px at 100% -10%, #1b1b1f 0%, var(--bg) 55%) fixed;
+      display:flex; align-items:center; justify-content:center;
+      padding:20px;
+    }
+    .card{
+      width:min(420px, 100%);
+      background:linear-gradient(180deg,#151518 0%, #101013 100%);
+      border:1px solid #22242a;
+      border-radius:22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+      padding:26px 22px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    /* faint icon pattern */
+    .card::after{
+      content:"";
+      position:absolute; inset:0;
+      background-image:
+        radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size:20px 20px;
+      opacity:.3; pointer-events:none;
+      mask-image: linear-gradient(#000, rgba(0,0,0,.0));
+    }
+
+    .logo{
+      display:flex; align-items:center; gap:8px;
+      margin-bottom:18px; position:relative; z-index:2;
+    }
+    .logo span.t{font-weight:800; font-size:44px; letter-spacing:.5px; color:#ee2a2a}
+    .logo span.two{font-weight:900; font-size:42px; color:#fff; margin-left:-6px}
+    .logo span.g{font-weight:900; font-size:44px; color:#ee2a2a; margin-left:-6px}
+
+    .list{display:flex; flex-direction:column; gap:14px; position:relative; z-index:2}
+    .row{
+      display:grid; grid-template-columns:28px 1fr;
+      align-items:center; gap:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .row a{color:var(--text); text-decoration:none}
+    .row a:focus-visible, .row button:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:12px}
+    .muted{color:var(--muted)}
+    .vat{display:flex; gap:.4ch; align-items:baseline}
+    .row .label{font-size:14px; letter-spacing:.2px}
+    .row .value{font-size:18px; font-weight:700; line-height:1.2}
+
+    .link{
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none; color:#fff; font-weight:800; font-size:22px;
+      border-bottom:3px solid var(--red);
+      padding-bottom:6px; width:max-content; margin:16px 6px 6px;
+    }
+
+    .qr{
+      display:flex; align-items:center; justify-content:center;
+      padding:14px; border-radius:16px; background:var(--pill);
+      border:1px dashed rgba(255,255,255,.18); margin:10px 0 16px;
+      color:#9aa0a6; text-align:center; font-size:14px;
+      min-height:120px;
+    }
+
+    .cta{
+      display:block; width:100%;
+      background:linear-gradient(180deg,#ff4242,#c91515);
+      color:#fff; border:0; font-weight:900; letter-spacing:.2px;
+      padding:16px 18px; border-radius:16px; font-size:18px; cursor:pointer;
+      box-shadow: 0 8px 20px rgba(226,36,36,.35);
+    }
+    .cta:active{transform:translateY(1px)}
+    .icon{width:24px; height:24px; display:inline-block}
+    .small{font-size:12px; color:#9aa0a6; text-align:center; margin-top:10px}
+  </style>
+</head>
+<body>
+  <main class="card" aria-label="TAP2GO contactkaart">
+    <!-- LOGO: T 2 G -->
+    <div class="logo" aria-hidden="true">
+      <span class="t">T</span><span class="two">2</span><span class="g">G</span>
+    </div>
+
+    <section class="list">
+      <!-- Email -->
+      <div class="row">
+        <span class="icon" aria-hidden="true">
+          <!-- envelope -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" stroke-width="1.6"/>
+            <path d="m22 8-10 6L2 8" stroke-width="1.6"/>
+          </svg>
+        </span>
+        <div>
+          <div class="label muted">E-mail</div>
+          <a class="value" href="mailto:info@tap2go.be?subject=Contact%20via%20NFC">info@tap2go.be</a>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="row">
+        <span class="icon" aria-hidden="true">
+          <!-- phone -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.86.33 1.7.62 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.58-1.12a2 2 0 0 1 2.11-.45c.8.29 1.64.5 2.5.62A2 2 0 0 1 22 16.92z" stroke-width="1.6"/>
+          </svg>
+        </span>
+        <div>
+          <div class="label muted">Telefoon</div>
+          <a class="value" href="tel:+32470170448">0470 17 04 48</a>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="row">
+        <span class="icon" aria-hidden="true">
+          <!-- pin -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 21s-7-5.33-7-11a7 7 0 1 1 14 0c0 5.67-7 11-7 11z" stroke-width="1.6"/>
+            <circle cx="12" cy="10" r="3" stroke-width="1.6"/>
+          </svg>
+        </span>
+        <div>
+          <div class="label muted">Adres</div>
+          <a class="value" href="https://maps.google.com/?q=Vekenstraat+16,+9255+Buggenhout" target="_blank" rel="noopener">Vekenstraat 16<br/>9255 Buggenhout</a>
+        </div>
+      </div>
+
+      <!-- VAT -->
+      <div class="row">
+        <span class="icon" aria-hidden="true">
+          <!-- receipt -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z" stroke-width="1.6"/>
+            <path d="M8 7h8M8 11h8M8 15h6" stroke-width="1.6"/>
+          </svg>
+        </span>
+        <div>
+          <div class="label muted">BTW</div>
+          <div class="value">BE 0653.831.270</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Website link -->
+    <a class="link" href="https://www.tap2go.be" target="_blank" rel="noopener">
+      <span class="icon" aria-hidden="true">
+        <!-- link icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L10 5" stroke-width="1.6"/>
+          <path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07L14 19" stroke-width="1.6"/>
+        </svg>
+      </span>
+      www.tap2go.be
+    </a>
+
+    <!-- Optional QR area (kan je vervangen door je eigen QR-afbeelding) -->
+    <div class="qr" aria-label="QR">
+      Plaats hier je QR-code (<img alt="" src="" style="display:none">)
+    </div>
+
+    <!-- Save Contact -->
+    <button id="saveContact" class="cta">gegevens opslaan</button>
+    <div class="small">Tik om dit contact als .vcf op je smartphone op te slaan.</div>
+  </main>
+
+  <script>
+    // Genereer en download een vCard die op iOS/Android opent
+    function downloadVCard() {
+      // vCard 3.0 – breed compatibel
+      const vcard =
+`BEGIN:VCARD
+VERSION:3.0
+N:;TAP2GO;;;
+FN:TAP2GO
+ORG:TAP2GO
+EMAIL;TYPE=INTERNET;TYPE=WORK:info@tap2go.be
+TEL;TYPE=CELL:+32470170448
+ADR;TYPE=WORK:;;Vekenstraat 16;Buggenhout;;9255;Belgium
+URL:https://www.tap2go.be
+NOTE:BTW BE 0653.831.270
+END:VCARD`;
+
+      const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+
+      // iOS/Android herkennen .vcf bestandsnaam
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'TAP2GO.vcf';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        URL.revokeObjectURL(a.href);
+        a.remove();
+      }, 1000);
+    }
+
+    document.getElementById('saveContact').addEventListener('click', downloadVCard);
+  </script>
+</body>
+</html>
